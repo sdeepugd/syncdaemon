@@ -67,7 +67,6 @@ class Changes(object):
         # import sys
         # getframe_expr = 'sys._getframe({}).f_code.co_name'
         # caller = eval(getframe_expr.format(2))
-        logging.info("in cl_getchanges.....")
         buf = create_string_buffer('\0', 4096)
         call = cls._get_api('gf_changelog_next_change')
 
