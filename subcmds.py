@@ -38,6 +38,7 @@ def subcmd_status(args):
 
 
 def subcmd_monitor(args):
+    logging.info("monitor spawned")
     import monitor
     from resource import GLUSTER, SSH, Popen
     go_daemon = False if args.debug else True
@@ -75,6 +76,7 @@ def subcmd_worker(args):
 def subcmd_slave(args):
     from resource import GLUSTER, Popen
 
+    logging.info("slave spawned")
     Popen.init_errhandler()
     slavevol = args.slave.split("::")[-1]
     local = GLUSTER("localhost", slavevol)
@@ -89,7 +91,7 @@ def subcmd_agent(args):
     from syncdutils import lf
 
     os.setsid()
-    logging.debug(lf("RPC FD",
+    logging.info(lf("subcmd_agent RPC FD",
                      rpc_fd=repr(args.rpc_fd)))
     return agent(Changelog(), args.rpc_fd)
 

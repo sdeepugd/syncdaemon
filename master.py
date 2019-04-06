@@ -97,7 +97,7 @@ def gmaster_builder(excrawl=None):
     else:
         changemixin = gconf.get("change-detector")
 
-    logging.debug(lf('setting up change detection mode',
+    logging.info(lf('setting up change detection mode',
                      mode=changemixin))
     modemixin = getattr(this, modemixin.capitalize() + 'Mixin')
     crawlmixin = getattr(this, 'GMaster' + changemixin.capitalize() + 'Mixin')
