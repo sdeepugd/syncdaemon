@@ -88,13 +88,17 @@ def gmaster_builder(excrawl=None):
     this = sys.modules[__name__]
     modemixin = gconf.get("special-sync-mode")
     if not modemixin:
+        logging.info("not modemixin")
         modemixin = 'normal'
 
     if gconf.get("change-detector") == 'xsync':
+        logging.info("changemixin : xsync")
         changemixin = 'xsync'
     elif excrawl:
+        logging.info("changemixin : excrawl")
         changemixin = excrawl
     else:
+        logging.info("change-detector")
         changemixin = gconf.get("change-detector")
 
     logging.info(lf('setting up change detection mode',
@@ -103,13 +107,17 @@ def gmaster_builder(excrawl=None):
     crawlmixin = getattr(this, 'GMaster' + changemixin.capitalize() + 'Mixin')
 
     if gconf.get("use-rsync-xattrs"):
+        logging.info("sendmarkmixin : SendmarkRsyncMixin")
         sendmarkmixin = SendmarkRsyncMixin
     else:
+        logging.info("sendmarkmixin : SendmarkNormalMixin")
         sendmarkmixin = SendmarkNormalMixin
 
     if gconf.get("ignore-deletes"):
+        logging.info("purgemixin : PurgeNoopMixin")
         purgemixin = PurgeNoopMixin
     else:
+        logging.info("purgemixin : PurgeNormalMixin")
         purgemixin = PurgeNormalMixin
 
     if gconf.get("sync-method") == "tarssh":
