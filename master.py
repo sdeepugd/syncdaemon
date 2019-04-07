@@ -1482,7 +1482,6 @@ class GMasterChangelogMixin(GMasterCommon):
         # get stime (from the brick) and purge changelogs
         # that are _historical_ to that time.
         data_stime = self.get_data_stime()
-        logging.info('in crawl of master')
         self.changelog_agent.scan()
         self.crawls += 1
         
